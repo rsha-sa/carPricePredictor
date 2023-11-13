@@ -23,3 +23,9 @@ Flask
 filelock
 fsspec
 pandas
+seaborn
+datetime
+matplotlib.pyplot
+scipy
+sklearn
+
