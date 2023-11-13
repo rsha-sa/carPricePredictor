@@ -44,5 +44,4 @@ threadpoolctl
 tzdata
 waitress
 Werkzeug
-sklearn.model_selection
 
