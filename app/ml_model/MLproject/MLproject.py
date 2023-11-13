@@ -31,7 +31,7 @@ plt.style.use('ggplot')
 Loading the dataset
 """
 
-file_path = 'Real-life-example.csv'
+file_path = 'app\ml_model\MLproject\Real-life-example.csv'
 df = pd.read_csv(file_path)
 
 """Exploring the data"""
