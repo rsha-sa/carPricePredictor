@@ -35,7 +35,7 @@ Loading the dataset
 current_dir = os.path.dirname(os.path.abspath(__file__))
 
 # Construct the absolute path to the CSV file
-file_path = os.path.join(current_dir, 'app', 'ml_model', 'MLproject', 'Real-life-example.csv')
+file_path = os.path.join(current_dir, 'Real-life-example.csv')
 
 # Read the CSV file
 df = pd.read_csv(file_path)
