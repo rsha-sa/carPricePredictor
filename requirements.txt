@@ -28,4 +28,21 @@ datetime
 matplotlib
 scipy
 sklearn
+blinker
+click
+colorama
+contourpy
+cycler
+fonttools
+itsdangerous
+kiwisolver
+pyparsing
+python-dateutil
+pytz
+scikit-learn
+six
+threadpoolctl
+tzdata
+waitress
+Werkzeug
 
