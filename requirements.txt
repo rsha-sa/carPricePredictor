@@ -22,3 +22,4 @@ virtualenv==20.24.6
 Flask
 filelock
 fsspec
+pandas
