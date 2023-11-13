@@ -27,7 +27,6 @@ seaborn
 datetime
 matplotlib
 scipy
-sklearn
 blinker
 click
 colorama
