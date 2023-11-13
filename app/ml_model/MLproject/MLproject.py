@@ -31,7 +31,13 @@ plt.style.use('ggplot')
 Loading the dataset
 """
 
-file_path = 'app\ml_model\MLproject\Real-life-example.csv'
+# Get the directory of the current script
+current_dir = os.path.dirname(os.path.abspath(__file__))
+
+# Construct the absolute path to the CSV file
+file_path = os.path.join(current_dir, 'app', 'ml_model', 'MLproject', 'Real-life-example.csv')
+
+# Read the CSV file
 df = pd.read_csv(file_path)
 
 """Exploring the data"""
