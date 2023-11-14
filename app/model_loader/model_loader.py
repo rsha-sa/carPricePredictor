@@ -9,7 +9,7 @@ def load_model():
     model_path = os.path.join(current_dir, 'carPricePredictor.pth')
 
     # Initialize the model
-    model = CarPricePredictor(14)  # Replace with the correct input size
+    model = CarPricePredictor(14) 
 
     # Load the trained model state
     state_dict = torch.load(model_path, map_location=torch.device('cpu'))
