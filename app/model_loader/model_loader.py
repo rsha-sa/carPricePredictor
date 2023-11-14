@@ -1,5 +1,6 @@
 import torch
-from app.ml_model.MLproject.MLproject import CarPricePredictor 
+from app.ml_model.MLproject.MLproject import CarPricePredictor
+import os 
 
 def load_model():
     # Get the directory of the current file
