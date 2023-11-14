@@ -93,14 +93,21 @@
                         <label for="brand" class="form-label">Select Brand:</label>
                         <select name="brand" class="form-select">
                             <option value="Volkswagen">Volkswagen</option>
-                            <!-- Other options... -->
+                            <option value="Mercedes-Benz">Mercedes-Benz</option>
+                            <option value="BMW">BMW</option>
+                            <option value="Toyota">Toyota</option>
+                            <option value="Renault">Renault</option>
+                            <option value="Audi">Audi</option>
+                            <option value="Mitsubishi">Mitsubishi</option>
                         </select>
                     </div>
                     <div class="mb-3">
                         <label for="engineType" class="form-label">Select Engine Type:</label>
                         <select name="engineType" class="form-select">
                             <option value="Diesel">Diesel</option>
-                            <!-- Other options... -->
+                            <option value="Petrol">Petrol</option>
+                            <option value="Gas">Gas</option>
+                            <option value="other">Other</option>
                         </select>
                     </div>
                     <button type="submit" class="btn btn-primary">Predict Price</button>
@@ -109,7 +116,11 @@
                 {% if prediction_text %}
                     <div class="mt-4">
                         <h3>Car Information:</h3>
-                        <!-- Display car information... -->
+                        <p>Mileage: {{ mileage }}</p>
+                        <p>EngineV: {{ engineV }}</p>
+                        <p>Year: {{ year }}</p>
+                        <p>Brand: {{ brand }}</p>
+                        <p>Engine Type: {{ engineType }}</p>
                     </div>
                     <hr>
                     <h3>Predicted Price:</h3>
