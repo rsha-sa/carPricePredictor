@@ -279,7 +279,6 @@ e = rms(y_train, x_train @ theta)
 et = rms(y_test, x_test @ theta)
 print(e, et)
 
-"""-------------------------
 
 Initializing the model, loss_fn, optimizer
 """
