@@ -3,14 +3,14 @@ from app.model_loader.model_loader import load_model
 import datetime
 import torch 
 
-app = Flask(__name__, static_folder='app\static')
+app = Flask(__name__, static_folder='app/static')
 
 
 model = load_model()
 
 @app.route('/')
 def index():
-    img_url = url_for('static', filename='logo.png')
+    img_url = url_for('static', filename='app/static/logo.png')
     return render_template('index.html', img_url=img_url)
 
 
