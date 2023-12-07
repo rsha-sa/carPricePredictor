@@ -1,6 +1,7 @@
 import torch
-from app.ml_model.MLproject.MLproject import CarPricePredictor
+from app.ml_model.MLproject import CarPricePredictor
 import os 
+
 
 def load_model():
     # Get the directory of the current file
@@ -10,7 +11,7 @@ def load_model():
     model_path = os.path.join(current_dir, 'carPricePredictor.pth')
 
     # Initialize the model
-    model = CarPricePredictor(14) 
+    model = CarPricePredictor(84) 
 
     # Load the trained model state
     state_dict = torch.load(model_path, map_location=torch.device('cpu'))
@@ -22,3 +23,4 @@ def load_model():
     model.eval()
 
     return model
+

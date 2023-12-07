@@ -59,15 +59,14 @@
             padding: 10px;
             font-size: 16px;
         }
+
     </style>
 </head>
 
 <body>
 
-    <!-- Navbar with Logo -->
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
-            <!-- Colorful Logo -->
             <a class="navbar-brand" href="#">
                 Car Price Predictor
             </a>
@@ -78,54 +77,164 @@
         <div class="card">
             <div class="card-body">
                 <h2 class="card-title mb-4">Car Price Prediction Tool</h2>
+
                 <h5 class="card-title mb-4"> Enter Car's Information: </h5>
-                <form action="{{ url_for('predict') }}" method="post">
+
+                <form action="{{ url_for('predict') }}" method="post"  id="car-price-prediction-form">
                     <div class="mb-3">
-                        <input type="text" name="mileage" class="form-control" placeholder="Mileage (in km)" required="required">
+                        <input type="text" name="mileage" class="form-control" placeholder="Mileage (in km)"  pattern="[0-9]+(\.[0-9]+)?" title="Please enter a valid number" value="{{ request.form['mileage'] }}" required="required">
                     </div>
                     <div class="mb-3">
-                        <input type="text" name="engineV" class="form-control" placeholder="EngineV" required="required">
+                        <input type="text" name="engineV" class="form-control" placeholder="Engine size in Liters"  pattern="[0-9]+(\.[0-9]+)?" title="Please enter a valid number" value="{{ request.form['engineV'] }}"required="required">
                     </div>
                     <div class="mb-3">
-                        <input type="text" name="year" class="form-control" placeholder="Year" required="required">
+                        <input type="text" name="year" class="form-control" placeholder="Year" pattern="[0-9]+" title="Please enter a valid number" value="{{ request.form['year'] }}" required="required">
                     </div>
+                    
                     <div class="mb-3">
-                        <label for="brand" class="form-label">Select Brand:</label>
-                        <select name="brand" class="form-select">
-                            <option value="Volkswagen">Volkswagen</option>
-                            <option value="Mercedes-Benz">Mercedes-Benz</option>
-                            <option value="BMW">BMW</option>
-                            <option value="Toyota">Toyota</option>
-                            <option value="Renault">Renault</option>
-                            <option value="Audi">Audi</option>
-                            <option value="Mitsubishi">Mitsubishi</option>
+                        <label for="brand" class="form-label" >Select Brand:</label>
+                        <select id="brand" name="brand" class="form-select" onchange="updateModels(this.value)">
+                            <option value="" {% if not request.form['brand'] %} selected {% endif %}></option>
+                            <option value="Volkswagen" {% if request.form['brand'] == 'Volkswagen' %} selected {% endif %}>Volkswagen</option>
+                            <option value="Mercedes-Benz" {% if request.form['brand'] == 'Mercedes-Benz' %} selected {% endif %}>Mercedes-Benz</option>
+                            <option value="BMW" {% if request.form['brand'] == 'BMW' %} selected {% endif %}>BMW</option>
+                            <option value="Toyota" {% if request.form['brand'] == 'Toyota' %} selected {% endif %}>Toyota</option>
+                            <option value="Renault" {% if request.form['brand'] == 'Renault' %} selected {% endif %}>Renault</option>
+                            <option value="Audi" {% if request.form['brand'] == 'Audi' %} selected {% endif %}>Audi</option>
+                            <option value="Mitsubishi" {% if request.form['brand'] == 'Mitsubishi' %} selected {% endif %}>Mitsubishi</option>
                         </select>
                     </div>
+
+                    <div class="mb-3">
+                        <label for="model" class="form-label">Select Model:</label>
+                        <select id = "model" name="model" class="form-select">
+                            <option value=""></option>
+                                {% if selected_brand == 'Volkswagen' %}
+                                <option value="Caddy" {% if request.form['model'] == 'Caddy' %} selected {% endif %}>Caddy</option>
+                                <option value="Touareg" {% if request.form['model'] == 'Touareg' %} selected {% endif %}>Touareg</option>
+                                <option value="Passat-B6" {% if request.form['model'] == 'Passat-B6' %} selected {% endif %}>Passat B6</option>
+                                <option value="T5 (Transporter)" {% if request.form['model'] == 'T5-(Transporter)' %} selected {% endif %}>T5 (Transporter)</option>
+                                <option value="Polo" {% if request.form['model'] == 'Polo' %} selected {% endif %}>Polo</option>
+                                <option value="Passat B5" {% if request.form['model'] == 'Passat-B5' %} selected {% endif %}>Passat B5</option>
+                                <option value="Passat B7" {% if request.form['model'] == 'Passat-B7' %} selected {% endif %}>Passat B7</option>
+                                <option value="Jetta" {% if request.form['model'] == 'Jetta' %} selected {% endif %}>Jetta</option>
+                                <option value="T4 (Transporter)" {% if request.form['model'] == 'T4-(Transporter)' %} selected {% endif %}>T4 (Transporter)</option>
+                                <option value="T5 (Transporter)" {% if request.form['model'] == 'T5-(Transporter)' %} selected {% endif %}>T5 (Transporter)</option>
+                                <option value="Other" {% if request.form['model'] == 'Other' %} selected {% endif %}>Other</option>
+
+                            {% elif selected_brand == 'Mercedes-Benz' %}
+                                <option value="E-Class" {% if request.form['model'] == 'E-Class' %} selected {% endif %}>E-Class</option>
+                                <option value="Vito" {% if request.form['model'] == 'Vito' %} selected {% endif %}>Vito</option>
+                                <option value="C-Class" {% if request.form['model'] == 'C-Class' %} selected {% endif %}>C-Class</option>
+                                <option value="S 500" {% if request.form['model'] == 'S-500' %} selected {% endif %}>S 500</option>
+                                <option value="S 350" {% if request.form['model'] == 'S-350' %} selected {% endif %}>S 350</option>
+                                <option value="GLS 350" {% if request.form['model'] == 'GLS-350' %} selected {% endif %}>GLS 350</option>
+                                <option value="ML 350" {% if request.form['model'] == 'ML-350' %} selected {% endif %}>ML 350</option>
+                                <option value="GLE-Class" {% if request.form['model'] == 'GLE-Class' %} selected {% endif %}>GLE-Class</option>
+                                <option value="Sprinter 313" {% if request.form['model'] == 'Sprinter-313' %} selected {% endif %}>Sprinter 313</option>
+                                <option value="V 250" {% if request.form['model'] == 'V-250' %} selected {% endif %}>V 250</option>
+                                <option value="Other" {% if request.form['model'] == 'Other' %} selected {% endif %}>Other</option>
+
+                            {% elif selected_brand == 'BMW' %}
+                                <option value="X5" {% if request.form['model'] == 'X5' %} selected {% endif %}>X5</option>
+                                <option value="520" {% if request.form['model'] == '520' %} selected {% endif %}>520</option>
+                                <option value="320" {% if request.form['model'] == '320' %} selected {% endif %}>320</option>
+                                <option value="525" {% if request.form['model'] == '525' %} selected {% endif %}>525</option>
+                                <option value="530" {% if request.form['model'] == '530' %} selected {% endif %}>530</option>
+                                <option value="X6" {% if request.form['model'] == 'X6' %} selected {% endif %}>X6</option>
+                                <option value="318" {% if request.form['model'] == '318' %} selected {% endif %}>318</option>
+                                <option value="730" {% if request.form['model'] == '730' %} selected {% endif %}>730</option>
+                                <option value="535" {% if request.form['model'] == '535' %} selected {% endif %}>535</option>
+                                <option value="528" {% if request.form['model'] == '528' %} selected {% endif %}>528</option>
+                                <option value="Other" {% if request.form['model'] == 'Other' %} selected {% endif %}>Other</option>
+
+                            {% elif selected_brand == 'Toyota' %}
+                                <option value="Camry" {% if request.form['model'] == 'Camry' %} selected {% endif %}>Camry</option>
+                                <option value="Land Cruiser Prado" {% if request.form['model'] == 'LandCruiserPrado' %} selected {% endif %}>Land Cruiser Prado</option>
+                                <option value="Rav 4" {% if request.form['model'] == 'Rav-4' %} selected {% endif %}>Rav 4</option>
+                                <option value="Corolla" {% if request.form['model'] == 'Corolla' %} selected {% endif %}>Corolla</option>
+                                <option value="Land Cruiser 200" {% if request.form['model'] == 'LandCruiser-200' %} selected {% endif %}>Land Cruiser 200</option>
+                                <option value="Auris" {% if request.form['model'] == 'Auris' %} selected {% endif %}>Auris</option>
+                                <option value="Avensis" {% if request.form['model'] == 'Avensis' %} selected {% endif %}>Avensis</option>
+                                <option value="Land Cruiser 100" {% if request.form['model'] == 'LandCruiser-100' %} selected {% endif %}>Land Cruiser 100</option>
+                                <option value="Highlander" {% if request.form['model'] == 'Highlander' %} selected {% endif %}>Highlander</option>
+                                <option value="Yaris" {% if request.form['model'] == 'Yaris' %} selected {% endif %}>Yaris</option>
+                                <option value="Other" {% if request.form['model'] == 'Other' %} selected {% endif %}>Other</option>
+
+                            {% elif selected_brand == 'Renault' %}
+                                <option value="Kangoo" {% if request.form['model'] == 'Kangoo' %} selected {% endif %}>Kangoo</option>
+                                <option value="Megane" {% if request.form['model'] == 'Megane' %} selected {% endif %}>Megane</option>
+                                <option value="Trafic" {% if request.form['model'] == 'Trafic' %} selected {% endif %}>Trafic</option>
+                                <option value="Laguna" {% if request.form['model'] == 'Laguna' %} selected {% endif %}>Laguna</option>
+                                <option value="Scenic" {% if request.form['model'] == 'Scenic' %} selected {% endif %}>Scenic</option>
+                                <option value="Grand Scenic" {% if request.form['model'] == 'GrandScenic' %} selected {% endif %}>Grand Scenic</option>
+                                <option value="Logan" {% if request.form['model'] == 'Logan' %} selected {% endif %}>Logan</option>
+                                <option value="Symbol" {% if request.form['model'] == 'Symbol' %} selected {% endif %}>Symbol</option>
+                                <option value="Master" {% if request.form['model'] == 'Master' %} selected {% endif %}>Master</option>
+                                <option value="Fluence" {% if request.form['model'] == 'Fluence' %} selected {% endif %}>Fluence</option>
+                                <option value="Other" {% if request.form['model'] == 'Other' %} selected {% endif %}>Other</option>
+
+                            {% elif selected_brand == 'Audi' %}
+                                <option value="A6" {% if request.form['model'] == 'A6' %} selected {% endif %}>A6</option>
+                                <option value="Q7" {% if request.form['model'] == 'Q7' %} selected {% endif %}>Q7</option>
+                                <option value="A4" {% if request.form['model'] == 'A4' %} selected {% endif %}>A4</option>
+                                <option value="A8" {% if request.form['model'] == 'A8' %} selected {% endif %}>A8</option>
+                                <option value="A6 Allroad" {% if request.form['model'] == 'A6-Allroad' %} selected {% endif %}>A6 Allroad</option>
+                                <option value="100" {% if request.form['model'] == '100' %} selected {% endif %}>100</option>
+                                <option value="A5" {% if request.form['model'] == 'A5' %} selected {% endif %}>A5</option>
+                                <option value="80" {% if request.form['model'] == '80' %} selected {% endif %}>80</option>
+                                <option value="Q5" {% if request.form['model'] == 'Q5' %} selected {% endif %}>Q5</option>
+                                <option value="A3" {% if request.form['model'] == 'A3' %} selected {% endif %}>A3</option>
+                                <option value="Other" {% if request.form['model'] == 'Other' %} selected {% endif %}>Other</option>
+
+                            {% elif selected_brand == 'Mitsubishi' %}
+                                <option value="Lancer" {% if request.form['model'] == 'Lancer' %} selected {% endif %}>Lancer</option>
+                                <option value="Lancer X" {% if request.form['model'] == 'Lancer-X' %} selected {% endif %}>Lancer X</option>
+                                <option value="Pajero Wagon" {% if request.form['model'] == 'PajeroWagon' %} selected {% endif %}>Pajero Wagon</option>
+                                <option value="Outlander" {% if request.form['model'] == 'Outlander' %} selected {% endif %}>Outlander</option>
+                                <option value="Galant" {% if request.form['model'] == 'Galant' %} selected {% endif %}>Galant</option>
+                                <option value="Pajero Sport" {% if request.form['model'] == 'PajeroSport' %} selected {% endif %}>Pajero Sport</option>
+                                <option value="Outlander XL" {% if request.form['model'] == 'Outlander-XL' %} selected {% endif %}>Outlander XL</option>
+                                <option value="L 200" {% if request.form['model'] == 'L-200' %} selected {% endif %}>L 200</option>
+                                <option value="Colt" {% if request.form['model'] == 'Colt' %} selected {% endif %}>Colt</option>
+                                <option value="Carisma" {% if request.form['model'] == 'Carisma' %} selected {% endif %}>Carisma</option>
+                                <option value="Other" {% if request.form['model'] == 'Other' %} selected {% endif %}>Other</option>
+    
+                            {% endif %}
+                        </select>
+            
+                    </div>
+
                     <div class="mb-3">
                         <label for="engineType" class="form-label">Select Engine Type:</label>
-                        <select name="engineType" class="form-select">
-                            <option value="Diesel">Diesel</option>
-                            <option value="Petrol">Petrol</option>
-                            <option value="Gas">Gas</option>
-                            <option value="other">Other</option>
+                        <select id ='engineType' name="engineType" class="form-select">
+                            <option value="" {% if not request.form['engineType'] %} selected {% endif %}></option>
+                            <option value="Diesel" {% if request.form['engineType'] == 'Diesel' %} selected {% endif %}>Diesel</option>
+                            <option value="Petrol"{% if request.form['engineType'] == 'Petrol' %} selected {% endif %}>Petrol</option>
+                            <option value="Gas" {% if request.form['engineType'] == 'Gas' %} selected {% endif %}>Gas</option>
+                            <option value="other" {% if request.form['engineType'] == 'other' %} selected {% endif %}>Other</option>
                         </select>
                     </div>
+                    
+
                     <button type="submit" class="btn btn-primary">Predict Price</button>
+
+
                 </form>
 
                 {% if prediction_text %}
                     <div class="mt-4">
                         <h3>Car Information:</h3>
-                        <p>Mileage: {{ mileage }}</p>
-                        <p>EngineV: {{ engineV }}</p>
+                        <p>Mileage: {{ mileage }} km</p>
+                        <p>Engine size in Liters: {{ engineV }} L</p>
                         <p>Year: {{ year }}</p>
                         <p>Brand: {{ brand }}</p>
+                        <p>Model: {{ selected_model }}</p>
                         <p>Engine Type: {{ engineType }}</p>
                     </div>
                     <hr>
                     <h3>Predicted Price:</h3>
                     <p>{{ prediction_text }}</p>
-                    <p>{{ accuracy_text }}</p>
                 {% endif %}
             </div>
         </div>
@@ -133,8 +242,68 @@
 
     <!-- Bootstrap JS and dependencies (popper.js and jQuery) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    
+    <script>
 
+        document.addEventListener("DOMContentLoaded", function () {
+            // Clear form fields, car information, and predicted price on page load
+            if (performance.navigation.type === 1) {
+                // Clear form fields only when the page is reloaded
+                clearForm();
+                window.scrollTo(0, 0);
+            }
+
+            // Initialize modelsSelect in the global scope
+            modelsSelect = document.querySelector('select[name="model"]');
+            
+            // Ensure the "Select Model" dropdown is initially visible
+            modelsSelect.style.display = 'block';
+        });   
+
+        function updateModels(brand) {
+            modelsSelect.innerHTML = '<option value=""></option>';
+
+            if (!brand) {
+                modelsSelect.style.display = 'none';
+                return;
+            }
+
+            // Make an AJAX request to get models for the selected brand
+            fetch(`/get_models/${brand}`)
+                .then(response => response.json())
+                .then(models => {
+                    models.forEach(model => {
+                        var option = document.createElement('option');
+                        option.value = model;
+                        option.text = model;
+                        modelsSelect.add(option);
+                    });
+
+                    // Show the "Select Model" dropdown
+                    modelsSelect.style.display = 'block';
+                });
+            }
+
+    
+        function clearForm() {
+            var form = document.getElementById("car-price-prediction-form");
+    
+            // Reset the form
+            form.reset();
+    
+            var textInputs = form.getElementsByTagName("input");
+            for (var i = 0; i < textInputs.length; i++) {
+                textInputs[i].value = "";
+            }
+    
+            // Clear select elements
+            var selects = form.getElementsByTagName("select");
+            for (var i = 0; i < selects.length; i++) {
+                selects[i].selectedIndex = 0;
+            }
+        }
+
+    </script>
 </body>
 
 </html>
-
