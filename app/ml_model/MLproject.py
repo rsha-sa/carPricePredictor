@@ -30,7 +30,7 @@ df = pd.read_csv(file_path)
 
 
 
-#2. Data Pre-processing
+# Data Pre-processing
 
 # handling null values
 

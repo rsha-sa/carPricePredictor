@@ -246,17 +246,14 @@
     <script>
 
         document.addEventListener("DOMContentLoaded", function () {
-            // Clear form fields, car information, and predicted price on page load
+            
             if (performance.navigation.type === 1) {
-                // Clear form fields only when the page is reloaded
                 clearForm();
                 window.scrollTo(0, 0);
             }
 
-            // Initialize modelsSelect in the global scope
             modelsSelect = document.querySelector('select[name="model"]');
             
-            // Ensure the "Select Model" dropdown is initially visible
             modelsSelect.style.display = 'block';
         });   
 
@@ -268,7 +265,6 @@
                 return;
             }
 
-            // Make an AJAX request to get models for the selected brand
             fetch(`/get_models/${brand}`)
                 .then(response => response.json())
                 .then(models => {
@@ -279,7 +275,6 @@
                         modelsSelect.add(option);
                     });
 
-                    // Show the "Select Model" dropdown
                     modelsSelect.style.display = 'block';
                 });
             }
@@ -288,7 +283,6 @@
         function clearForm() {
             var form = document.getElementById("car-price-prediction-form");
     
-            // Reset the form
             form.reset();
     
             var textInputs = form.getElementsByTagName("input");
@@ -296,7 +290,6 @@
                 textInputs[i].value = "";
             }
     
-            // Clear select elements
             var selects = form.getElementsByTagName("select");
             for (var i = 0; i < selects.length; i++) {
                 selects[i].selectedIndex = 0;
