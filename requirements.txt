@@ -18,7 +18,7 @@ torchaudio
 torchvision
 typing_extensions>=4.7.1
 urllib3==1.26.13
-virtualenv==20.24.6
+virtualenv==20.26.6
 Flask
 filelock
 fsspec
