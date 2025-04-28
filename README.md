@@ -1,4 +1,4 @@
-Car Price Predictor 🚗💰
+Car Price Predictor
 
 A machine learning web application that predicts car prices based on user-provided features.
 Built with Python, scikit-learn, and a simple responsive frontend (HTML/CSS).
