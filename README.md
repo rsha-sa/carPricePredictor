@@ -8,15 +8,23 @@ Built with Python, scikit-learn, and a simple responsive frontend (HTML/CSS).
 
 
 📌 Project Overview
-Goal: Predict the resale price of a car based on attributes like year, fuel type, kilometers driven, etc.
-Model: Trained a regression model using scikit-learn.
-Frontend: Basic responsive UI using HTML and CSS.
-Backend: Python server to load the trained model and serve predictions (you can mention Flask if you use it later).
+Objective: Predict the resale price of a car using various attributes such as manufacturing year, model, brand, kilometers driven, engine type, and engine size.
+
+Machine Learning Model: Trained a regression model using scikit-learn.
+
+Frontend: A simple, responsive user interface built with HTML and CSS.
+
+Backend: Developed using Flask, a lightweight Python web framework. It serves the trained model and handles user input to generate predictions.
 
 🛠️ Tech Stack
 Programming Language: Python
-Libraries: scikit-learn, Pandas, NumPy, Matplotlib
+
+Libraries: scikit-learn, pandas, numpy, matplotlib
+
+Framework: Flask
+
 Frontend: HTML, CSS
+
 Tools: Git, GitHub
 
 📚 Acknowledgements
